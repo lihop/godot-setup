@@ -1,0 +1,30 @@
+name: "Demo"
+on: [push]
+
+jobs:
+  run-godot:
+    name: ${{ matrix.os }} ${{ matrix.bits }}bit ${{ matrix.version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+        bits: [64, 32]
+        version: ["v3.3.2-stable", "v3.2-stable"]
+        mono: [no]
+        exclude:
+          - os: macos-latest
+            bits: 32
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Godot
+        id: setup-godot
+        uses: ./
+        with:
+          version: ${{ matrix.version }}
+          bits: ${{ matrix.bits }}
+          mono: ${{ matrix.mono }}
+          log-level: debug
+      - shell: bash
+        run: godot --editor --quit

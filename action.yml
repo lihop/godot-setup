@@ -1,0 +1,26 @@
+name: "Run Godot"
+description: "Run Godot on Linux, Windows, or macOS."
+inputs:
+  version:
+    description: "Godot version to use"
+    required: true
+    default: "3.3.2-stable"
+  run:
+    description: "Command to run"
+    required: true
+    default: "--version"
+  mono:
+    default: false
+  mesa-dist-win-version:
+    description: "Version of mesa-dist-win to use"
+    required: false
+    default: "21.1.5"
+  bits:
+    description: "64 or 32 bit build"
+    required: false
+    default: 64
+  log-level:
+    default: "info"
+runs:
+  using: "node12"
+  main: "index.js"
