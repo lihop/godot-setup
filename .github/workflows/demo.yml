@@ -13,8 +13,6 @@ jobs:
         version: ["v3.3.2-stable", "v3.2-stable"]
         mono: [no]
         exclude:
-          - os: ubuntu-latest
-            bits: 32
           - os: macos-latest
             bits: 32
     steps:
