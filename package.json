@@ -26,6 +26,7 @@
     "@terascope/fetch-github-release": "^0.7.7",
     "glob": "^7.1.7",
     "loglevel": "^1.7.1",
+    "replace-in-file": "^6.2.0",
     "semver": "^7.3.5",
     "wget-improved": "^3.2.1"
   },
