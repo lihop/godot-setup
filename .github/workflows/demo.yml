@@ -23,8 +23,6 @@ jobs:
         with:
           version: ${{ matrix.version }}
           bits: ${{ matrix.bits }}
-          mono: ${{ matrix.mono }}
-          log-level: debug
       - shell: bash
         run: godot --editor --quit
 
