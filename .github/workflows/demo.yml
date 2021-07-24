@@ -11,7 +11,6 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         bits: [64, 32]
         version: ["v3.3.2-stable", "v3.2-stable"]
-        mono: [no]
         exclude:
           - os: macos-latest
             bits: 32
@@ -28,3 +27,30 @@ jobs:
           log-level: debug
       - shell: bash
         run: godot --editor --quit
+
+  with_alias:
+    name: "with alias"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Godot with alias
+        uses: ./
+        with:
+          alias: coolGameEngine
+      - name: Run Godot with alias
+        run: coolGameEngine --editor --quit
+      - name: Setup Godot v3.3.2 with alias
+        uses: ./
+        with:
+          version: 3.3.2
+          alias: godot-3.3.2
+      - name: Setup Godot v3.2 with alias
+        uses: ./
+        with:
+          version: 3.2
+          alias: godot-3.2
+      - name: Check versions
+        run: |
+          godot-3.3.2 --version || true
+          godot-3.2 --version || true
