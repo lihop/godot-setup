@@ -54,3 +54,14 @@ jobs:
         run: |
           godot-3.3.2 --version || true
           godot-3.2 --version || true
+
+  no_cache:
+    name: "no cache"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Godot without using cache
+        uses: ./
+        with:
+          cache: false

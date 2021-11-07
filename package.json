@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/lihop/run-godot#readme",
   "dependencies": {
+    "@actions/cache": "^1.0.7",
     "@actions/core": "^1.4.0",
     "@actions/exec": "^1.1.0",
     "@actions/github": "^5.0.0",

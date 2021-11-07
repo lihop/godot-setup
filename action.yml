@@ -20,6 +20,10 @@ inputs:
     description: "Name of the Godot executable that will be added to PATH"
     required: false
     default: "godot"
+  cache:
+    description: "Try to save/restore Godot download to/from cache"
+    required: false
+    default: true
 runs:
   using: "node12"
   main: "index.js"
