@@ -12,6 +12,10 @@ inputs:
     description: "64 or 32 bit build"
     required: false
     default: 64
+  mono:
+    description: "Use the mono version of Godot"
+    required: false
+    default: false
   alias:
     description: "Name of the Godot executable that will be added to PATH"
     required: false

@@ -3,13 +3,14 @@ on: [push]
 
 jobs:
   run-godot:
-    name: ${{ matrix.os }} ${{ matrix.bits }}bit ${{ matrix.version }}
+    name: ${{ matrix.os }} ${{ matrix.bits }}bit ${{ matrix.version }} ${{ matrix.mono && 'mono' || '' }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         bits: [64, 32]
+        mono: [true, false]
         version: ["v3.3.2-stable", "v3.4-beta4", "v3.4-stable"]
         exclude:
           - os: macos-latest
@@ -23,6 +24,7 @@ jobs:
         with:
           version: ${{ matrix.version }}
           bits: ${{ matrix.bits }}
+          mono: ${{ matrix.mono }}
       - shell: bash
         run: godot --editor --quit
 
