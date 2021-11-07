@@ -1,7 +1,6 @@
 const core = require("@actions/core");
 const exec = require("@actions/exec");
 const github = require("@actions/github");
-const log = require("loglevel");
 
 const Linux = require("./lib/Linux");
 const MacOS = require("./lib/MacOS");
@@ -9,22 +8,20 @@ const Windows = require("./lib/Windows");
 
 async function main() {
   try {
-    log.setLevel(core.getInput("log-level", { default: "info" }));
-
     let platform;
 
-    log.debug(`process.platform: ${process.platform}`);
+    core.debug(`process.platform: ${process.platform}`);
     switch (process.platform) {
       case "linux":
-        log.info("🐧 Linux detected");
+        core.info("🐧 Linux detected");
         platform = new Linux();
         break;
       case "win32":
-        log.info("🪟 Windows detected");
+        core.info("🪟 Windows detected");
         platform = new Windows();
         break;
       case "darwin":
-        log.info("🍏 macOS detected");
+        core.info("🍏 macOS detected");
         platform = new MacOS();
         break;
       default:
@@ -38,7 +35,7 @@ async function main() {
     await platform.download();
     await platform.postDownload();
 
-    log.info("🏁 All done. Enjoy!");
+    core.info("🏁 All done. Enjoy!");
   } catch (e) {
     core.setFailed(e);
   }

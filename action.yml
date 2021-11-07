@@ -16,8 +16,6 @@ inputs:
     description: "Name of the Godot executable that will be added to PATH"
     required: false
     default: "godot"
-  log-level:
-    default: "info"
 runs:
   using: "node12"
   main: "index.js"
