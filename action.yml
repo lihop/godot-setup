@@ -1,5 +1,8 @@
-name: "Run Godot"
-description: "Run Godot on Linux, Windows, or macOS."
+name: "Godot Setup"
+description: "Setup Godot to run in graphical mode (i.e. non-headless) on Linux, Windows, or macOS."
+branding:
+  icon: "monitor"
+  color: "blue"
 inputs:
   version:
     description: "Godot version to use"
