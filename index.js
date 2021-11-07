@@ -41,21 +41,4 @@ async function main() {
   }
 }
 
-//async function runCommandWithXvfb(command, directory, options) {
-//  await exec.exec("sudo apt-get install -y xvfb");
-//  command = `xvfb-run --auto-servernum ${command}`;
-//
-//  try {
-//    await runCommand(command);
-//  } finally {
-//    await cleanUpXvfb();
-//  }
-//}
-//
-//async function cleanUpXvfb() {
-//  try {
-//    await exec.exec("bash", [`${__dirname}/cleanup.sh`]);
-//  } catch {}
-//}
-
 main();
