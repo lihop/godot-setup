@@ -13,7 +13,7 @@ inputs:
     required: false
     default: 64
   mono:
-    description: "Use the mono version of Godot"
+    description: "Use the Mono build"
     required: false
     default: false
   alias:
@@ -21,7 +21,7 @@ inputs:
     required: false
     default: "godot"
   cache:
-    description: "Try to save/restore Godot download to/from cache"
+    description: "Whether to save/restore Godot download to/from cache"
     required: false
     default: true
 runs:
