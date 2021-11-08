@@ -8,7 +8,7 @@ This can be useful if you want to test something graphical or platform-specific.
 
 ```yaml
 - name: Setup Godot
-  uses: lihop/godot-setup@v0.1.0
+  uses: lihop/setup-godot@v0.1.0
 
 # You can now run the downloaded version of godot using the `godot` command in your other steps.
 # For example, run Gut tests:
@@ -19,7 +19,7 @@ This can be useful if you want to test something graphical or platform-specific.
 # You can use the `alias` input if you want to use a different name for the Godot executable
 # or use different names for different versions. For example:
 - name: Install Godot Mono v3.4-beta5
-  uses: lihop/godot-setup@v0.1.0
+  uses: lihop/setup-godot@v0.1.0
   with:
     mono: true
     version: 3.4-beta5
