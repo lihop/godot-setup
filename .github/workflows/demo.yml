@@ -1,5 +1,8 @@
-name: "Demo"
-on: [push]
+name: "Build"
+on:
+  push:
+  schedule: # Test daily.
+    - cron: 0 11 * * *
 
 jobs:
   run-godot:
