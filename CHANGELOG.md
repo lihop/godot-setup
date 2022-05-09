@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Made package managers (i.e. APT, Chocolatey) less noisy.
+- [#4](https://github.com/lihop/setup-godot/issues/4): Log a warning and keep going if cache save/restore failed.
 
 ### Fixed
 
