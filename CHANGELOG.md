@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Made package managers (i.e. APT, Chocolatey) less noisy.
 
+### Security
+
+- Updated node modules using `npm audit fix`.
+
 ## [0.1.1](https://github.com/lihop/setup-godot/compare/v0.1.0...v0.1.1) - 2021-12-17
 
 ### Fixed
