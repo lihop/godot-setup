@@ -86,3 +86,22 @@ jobs:
         uses: ./
         with:
           cache: false
+
+  run_twice:
+    name: "runs twice"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Godot
+        uses: ./
+      - shell: bash
+        run: godot --editor --quit
+      - name: Setup Godot again
+        uses: ./
+      - shell: bash
+        run: godot --editor --quit

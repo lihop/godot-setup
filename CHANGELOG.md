@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Made package managers (i.e. APT, Chocolatey) less noisy.
 
+### Fixed
+
+- Handling of symlinks when `path` already exists. If `path` exists and is already a symlink to `target`, nothing needs to be done, otherwise `path` will be deleted, replaced with a symlink to `target`, and a warning logged.
+
 ### Security
 
 - Updated node modules using `npm audit fix`.
