@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Start X11 server and dummy sound device on Linux runner. This means that executables requiring an X11 server (such as exported projects) will not need to be run with xvfb-run. The server will be started on $DISPLAY. If the DISPLAY environment variable is not set it will default to ':0' and DISPLAY will be set.
 - This CHANGELOG file to keep a track of changes between releases.
 
 ### Changed
