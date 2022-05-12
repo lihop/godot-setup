@@ -1,1 +1,6 @@
+*.dmg
+*.exe
+*.log
 *.swp
+.import/
+test_project/test

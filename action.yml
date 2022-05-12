@@ -24,6 +24,10 @@ inputs:
     description: "Whether to save/restore Godot download to/from cache"
     required: false
     default: true
+  export-templates:
+    description: "Whether to download export templates"
+    required: false
+    default: false
 runs:
   using: "node12"
   main: "index.js"
