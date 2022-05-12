@@ -105,3 +105,27 @@ jobs:
         uses: ./
       - shell: bash
         run: godot --editor --quit
+
+  x11-server:
+    name: "starts X11 server"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check X11 server not running on :0
+        run: DISPLAY=:0; if ! xset -q; then exit 0; else exit 1; fi
+      - name: Setup Godot
+        uses: ./
+      - name: Check X11 server started on :0
+        run: DISPLAY=:0; if ! xset -q; then exit 1; else exit 0; fi
+      - name: Check X11 server not running on :95
+        run: DISPLAY=:95; if ! xset -q; then exit 0; else exit 1; fi
+      - name: Set DISPLAY environment variable to :95
+        uses: university-of-york/ds-devtool-setEnvVars@v1.1.1
+        with:
+          envFile: test/x11.env
+          overwrite: true
+      - name: Setup Godot again
+        uses: ./
+      - name: Check X11 server started on :95
+        run: DISPLAY=:95; if ! xset -q; then exit 1; else exit 0; fi
