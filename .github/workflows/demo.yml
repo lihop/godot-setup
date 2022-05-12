@@ -20,9 +20,8 @@ jobs:
             "v3.1.2-stable",
             "v3.2.3-stable",
             "v3.3.4-stable",
-            "v3.4-stable",
-            "v3.4.1-rc3",
             "v3.4.4-stable",
+            "v3.5-beta5",
           ]
         include:
           # Different versions of Godot have different command line options,
