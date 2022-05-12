@@ -56,11 +56,11 @@ The downloaded Godot executable will is cached for subsequent runs if the `cache
 
 ## Options
 
-| Name             | Default      | Description                                                                      |
-| ---------------- | ------------ | -------------------------------------------------------------------------------- |
-| version          | "3.4-stable" | Godot version to use                                                             |
-| bits             | 64           | 64 or 32 bit build                                                               |
-| mono             | false        | Use the Mono build                                                               |
-| alias            | "godot"      | Name of the Godot executable that will be added to PATH                          |
-| cache            | true         | Whether to save/restore Godot (and export templates if downloaded) to/from cache |
-| export-templates | false        | Download export templates                                                        |
+| Name             | Default        | Description                                                                      |
+| ---------------- | -------------- | -------------------------------------------------------------------------------- |
+| version          | "3.4.4-stable" | Godot version to use                                                             |
+| bits             | 64             | 64 or 32 bit build                                                               |
+| mono             | false          | Use the Mono build                                                               |
+| alias            | "godot"        | Name of the Godot executable that will be added to PATH                          |
+| cache            | true           | Whether to save/restore Godot (and export templates if downloaded) to/from cache |
+| export-templates | false          | Download export templates                                                        |
