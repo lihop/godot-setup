@@ -13,7 +13,7 @@ The downloaded Godot executable will is cached for subsequent runs if the `cache
 
 ```yaml
 - name: Setup Godot
-  uses: lihop/setup-godot@v1.0.0-beta1
+  uses: lihop/setup-godot@v1.0.0
 
 # You can now run the downloaded version of godot using the `godot` command in your other steps.
 # For example, run Gut tests:
@@ -24,7 +24,7 @@ The downloaded Godot executable will is cached for subsequent runs if the `cache
 # You can use the `alias` input if you want to use a different name for the Godot executable
 # or use different names for different versions. For example:
 - name: Install Godot Mono v3.4-beta5
-  uses: lihop/setup-godot@v1.0.0-beta1
+  uses: lihop/setup-godot@v1.0.0
   with:
     mono: true
     version: 3.4-beta5
@@ -38,7 +38,7 @@ The downloaded Godot executable will is cached for subsequent runs if the `cache
 # You can also download export templates if you plan to export projects.
 # The downloaded export templates will be cached along with the Godot executable if the `cache` input is set to `true` (default).
 - name: Install Godot 3.4.4-stable
-  uses: lihop/setup-godot@v1.0.0-beta1
+  uses: lihop/setup-godot@v1.0.0
   with:
     version: 3.4.4-stable
     export-templates: true
