@@ -49,7 +49,8 @@ The downloaded Godot executable will is cached for subsequent runs if the `cache
 
 # For Linux runners the setup-godot action will start an Xserver and export the DISPLAY environment variable as appropriate.
 # This means you can run the exported project without having to set up an Xserver or use `xvfb-run`.
-# Windows and macOS runners support graphical applications out of the box.
+# For Windows runners the action will setup OpenGL using [mesa-dist-win](https://github.com/pal1000/mesa-dist-win).
+# macOS runners support OpenGL applications out of the box.
 - name: Run exported project
   run: ./exports/linux.64/MyCoolGame.x86_64
 ```
