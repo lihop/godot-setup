@@ -159,3 +159,36 @@ jobs:
         uses: ./
       - name: Check X11 server started on :95
         run: DISPLAY=:95; if ! xset -q; then exit 1; else exit 0; fi
+
+  export-html5:
+    name: Export HTML5 (${{ matrix.os }}, ${{ matrix.bits }}bit, ${{ matrix.version }}, ${{ matrix.mono && 'mono, ' || '' }}${{ matrix.export-type }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        bits: [64, 32]
+        mono: [false, true]
+        export-type: [regular, threads, gdnative]
+        version: ["v3.4.4-stable"]
+        exclude:
+          - os: macos-latest
+            bits: 32
+          - mono: true
+            export-type: threads
+          - mono: true
+            export-type: gdnative
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Godot
+        uses: ./
+        with:
+          version: ${{ matrix.version }}
+          bits: ${{ matrix.bits }}
+          mono: ${{ matrix.mono }}
+          export-templates: true
+      - name: Export HTML5 (${{ matrix.export-type }})
+        shell: bash
+        working-directory: test_project
+        run: godot --no-window --export html5-${{ matrix.export-type }}

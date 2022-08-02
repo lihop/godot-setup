@@ -3,4 +3,5 @@
 *.log
 *.swp
 .import/
+test_project/export
 test_project/test
