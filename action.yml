@@ -7,7 +7,7 @@ inputs:
   version:
     description: "Godot version to use"
     required: true
-    default: "3.4.4-stable"
+    default: "3.5-stable"
   bits:
     description: "64 or 32 bit build"
     required: false
