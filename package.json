@@ -1,6 +1,6 @@
 {
   "name": "setup-godot",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Action to run Godot on Linux, Windows, and macOS.",
   "main": "index.js",
   "scripts": {
