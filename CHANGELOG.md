@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-- Update node modules using `npm audit fix`.
+- Updated node modules using `npm audit fix`.
 
 ## [1.0.2](https://github.com/lihop/setup-godot/compare/v1.0.0...v1.0.2) - 2022-08-10
 
