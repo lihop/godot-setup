@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/lihop/setup-godot/compare/v1.0.2...HEAD)
 
+### Changed
+
+- Default Godot version to 3.5-stable.
+
+### Security
+
+- Update node modules using `npm audit fix`.
+
 ## [1.0.2](https://github.com/lihop/setup-godot/compare/v1.0.0...v1.0.2) - 2022-08-10
 
 ### Fixed
