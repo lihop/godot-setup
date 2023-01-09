@@ -21,7 +21,7 @@ inputs:
     required: false
     default: "godot"
   cache:
-    description: "Whether to save/restore Godot download to/from cache"
+    description: "Whether to save/restore Godot download (and mesa-dist-win on Windows runners) to/from cache"
     required: false
     default: true
   export-templates:

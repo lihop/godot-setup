@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `github-token` input for use when downloading mesa-dist-win release from
   GitHub to avoid API rate limits. Defaults to ${{ secrets.GITHUB_TOKEN }} and
   shouldn't need to be set.
+- Added caching of the mesa-dist-win download to further reduce API requests.
 
 ### Fixed
 
