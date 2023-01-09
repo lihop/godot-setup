@@ -28,6 +28,10 @@ inputs:
     description: "Whether to download export templates"
     required: false
     default: false
+  github-token:
+    descripton: "GitHub token. Used to avoid API rate limits when downloading the mesa-dist-win release from GitHub on Windows runners. Defaults to secrets.GITHUB_TOKEN"
+    required: false
+    default: ${{ github.token }}
 runs:
   using: "node12"
   main: "index.js"

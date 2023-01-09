@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.0.1...HEAD)
 
+### Added
+
+- Added `github-token` input for use when downloading mesa-dist-win release from
+  GitHub to avoid API rate limits. Defaults to ${{ secrets.GITHUB_TOKEN }} and
+  shouldn't need to be set.
+
 ### Fixed
 
 - Fixed failure due to trying to kill pulseaudio daemon when it wasn't running.
+- Fixed "Response code 403 (rate limit exceeded)" errors that were occuring on
+  Windows runners due to hitting API rate limits.
 
 ## [2.0.1](https://github.com/lihop/setup-godot/compare/v2.0.0...v2.0.1) - 2022-09-29
 
