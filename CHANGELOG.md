@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   shouldn't need to be set.
 - Added caching of the mesa-dist-win download to further reduce API requests.
 
+### Changed
+
+- Change node version from 12 -> 16 and update packages.
+
 ### Fixed
 
 - Fixed failure due to trying to kill pulseaudio daemon when it wasn't running.
