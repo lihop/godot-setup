@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.0.1...HEAD)
 
+### Fixed
+
+- Fixed failure due to trying to kill pulseaudio daemon when it wasn't running.
+
 ## [2.0.1](https://github.com/lihop/setup-godot/compare/v2.0.0...v2.0.1) - 2022-09-29
 
 ### Fixed

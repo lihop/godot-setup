@@ -13,5 +13,5 @@ pulseaudio --check || pulseaudio -D
 # Running godot with X11 Display.
 xvfb-run --auto-servernum GODOT_EXECUTABLE "$@"
 
-# Cleanup.
-pulseaudio -k
+# Cleanup (allowed to fail).
+pulseaudio -k || true
