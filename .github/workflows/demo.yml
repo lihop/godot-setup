@@ -16,17 +16,17 @@ jobs:
         mono: [true, false]
         version:
           [
-            "v3.1-stable",
             "v3.1.2-stable",
             "v3.2.3-stable",
             "v3.3.4-stable",
-            "v3.4.4-stable",
-            "v3.5-beta5",
+            "v3.4.5-stable",
+            "v3.5.1-stable",
+            "v3.5.2-rc2",
           ]
         include:
           # Different versions of Godot have different command line options,
           # export_presets and project settings, so just export for this version.
-          - version: "v3.4.4-stable"
+          - version: "v3.5.1-stable"
             export-templates: true
         exclude:
           - os: macos-12
@@ -174,7 +174,7 @@ jobs:
         bits: [64, 32]
         mono: [false, true]
         export-type: [regular, threads, gdnative]
-        version: ["v3.4.4-stable"]
+        version: ["v3.5.1-stable"]
         exclude:
           - os: macos-latest
             bits: 32
