@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.0...HEAD)
 
+### Added
+
+- Added initial Linux support for Godot 4 (non-mono).
+
 ### Changed
 
 - Changed default Godot version from 3.5-stable to 3.5.1-stable.

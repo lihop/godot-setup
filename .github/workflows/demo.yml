@@ -22,6 +22,7 @@ jobs:
             "v3.4.5-stable",
             "v3.5.1-stable",
             "v3.5.2-rc2",
+            "v4.0-beta12",
           ]
         include:
           # Different versions of Godot have different command line options,
@@ -31,6 +32,12 @@ jobs:
         exclude:
           - os: macos-12
             bits: 32
+          - mono: true
+            version: "v4.0-beta12"
+          - os: macos-12
+            version: "v4.0-beta12"
+          - os: windows-latest
+            version: "v4.0-beta12"
 
           # Issue: https://github.com/godotengine/godot/issues/27496
           - os: ubuntu-latest
