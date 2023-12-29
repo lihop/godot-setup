@@ -1,4 +1,4 @@
-# Setup Godot
+# Godot Setup
 
 ![Godot Version](https://img.shields.io/badge/Godot-3.1+-blue.svg)
 [![Build](https://github.com/lihop/setup-godot/actions/workflows/demo.yml/badge.svg?event=schedule)](https://github.com/lihop/setup-godot/actions/workflows/demo.yml)

@@ -112,7 +112,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default version is now 3.4-stable.
 - Stable versions >= 3.4 are now downloaded from the godotengine repo [releases](https://github.com/godotengine/godot/releases) rather than tuxfamily.org.
 
-## [v0.0.0](https://github.com/lihop/setup-godot/tags/v0.0.0) - 2021-07-24
+## [v0.0.0](https://github.com/lihop/godot-setup/tags/v0.0.0) - 2021-07-24
 
 ### Added
 
