@@ -26,7 +26,7 @@ async function main() {
         break;
       default:
         core.setFailed(
-          `⚠ Unrecognized platform: ${process.platform}. Aborting!`
+          `⚠ Unrecognized platform: ${process.platform}. Aborting!`,
         );
         return;
     }
