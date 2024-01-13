@@ -4,8 +4,7 @@
   "description": "Action to run Godot on Linux, Windows, and macOS.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -30,11 +29,5 @@
     "replace-in-file": "^6.2.0",
     "semver": "^7.3.5",
     "wget-improved": "^3.3.1"
-  },
-  "devDependencies": {
-    "@azz/prettier-config": "^1.0.0",
-    "husky": "^8.0.0",
-    "prettier": "^2.3.2",
-    "pretty-quick": "^3.1.3"
   }
 }
