@@ -1,0 +1,7 @@
+- id: validate-git-archive
+  name: validate git archive
+  description: Ensure the git archive contains only the files and directories we want it to.
+  entry: validate-git-archive
+  language: node
+  stages: [post-commit]
+  always_run: true
