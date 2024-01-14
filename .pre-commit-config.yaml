@@ -1,5 +1,6 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
+exclude: "^node_modules/"
 ci:
   autofix_commit_msg: "fix: auto fixes"
   autoupdate_commit_msg: "chore: autoupdate"
@@ -14,4 +15,3 @@ repos:
     rev: v3.1.0
     hooks:
       - id: prettier
-        exclude: "^node_modules/"
