@@ -5,15 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.1...HEAD)
+## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.2...HEAD)
+
+## [v2.1.2](https://github.com/lihop/setup-godot/compare/v2.1.1...v2.1.2) - 2024-02-11
 
 ### Changed
 
-- Made changes to address several warnings.
+- Made changes to address several warnings, including use of deprecated node version and failure to reserve cache key.
 
 ### Fixed
 
 - Fixed failure to install mono on Windows via Chocolatey package manager.
+- Fixed silently failing Scream (virtual sound card) installation on Windows.
 
 ## [v2.1.1](https://github.com/lihop/setup-godot/compare/v2.1.0...v2.1.1) - 2023-12-29
 
