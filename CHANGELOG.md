@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.1...HEAD)
 
+### Changed
+
+- Made changes to address several warnings.
+
+### Fixed
+
+- Fixed failure to install mono on Windows via Chocolatey package manager.
+
 ## [v2.1.1](https://github.com/lihop/setup-godot/compare/v2.1.0...v2.1.1) - 2023-12-29
 
 ### Added
