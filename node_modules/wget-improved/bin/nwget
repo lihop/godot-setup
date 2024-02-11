@@ -12,6 +12,7 @@ nwget https://raw.github.com/Fyrd/caniuse/master/data.json -O /tmp/data.json
 
 var wget = require('../lib/wget');
 var path = require('path');
+var readline = require('readline');
 
 var args = require('minimist')(process.argv);
 var url = args._[2]
@@ -32,11 +33,18 @@ if (!output) return console.error('The second argument must be a file path for t
 var download = wget.download(url, path.resolve(output));
 
 download.on('error', function(err) {
+    process.stdout.write('\n');
     console.error(err);
 });
 download.on('end', function(output) {
+    readline.cursorTo(process.stdout, 0);
     console.log(output);
 });
 download.on('progress', function(progress) {
-    console.log(progress);
+    printProgressPercent(progress);
 });
+
+function printProgressPercent(progress) {
+    readline.cursorTo(process.stdout, 0);
+    process.stdout.write('Downloading... ' + Math.round(progress * 100) + '%');
+}

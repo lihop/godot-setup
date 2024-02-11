@@ -119,6 +119,30 @@ describe('Download Tests', function() {
         });
     });
 
+    it('Should handle 303 redirects that end with file download.', function(done) {
+        let download = wget.download(
+            'http://localhost:8994/file/redirect?test=303&count=0',
+            '/tmp/wget-test-file2.bin'
+        );
+        download.on('end', function(output) {
+            request(baseHTTP + '/file/redirect/metadata', function(
+                err,
+                res,
+                body
+            ) {
+                let meta = JSON.parse(body);
+                let file = fs.readFileSync('/tmp/wget-test-file2.bin');
+                let hash = crypto
+                    .createHash('sha256')
+                    .update(file)
+                    .digest('hex');
+                expect(output).to.equal('Finished writing to disk');
+                expect(hash).to.equal(meta.hash);
+                done();
+            });
+        });
+    });
+
     it('Should handle infinite redirects', function(done) {
         let download = wget.download(
             'http://localhost:8994/file/redirect/infinite',

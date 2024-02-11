@@ -27,13 +27,17 @@ app.get('/file/metadata', function(req, res) {
 
 app.get('/file/redirect', function(req, res) {
     let count = 1;
+    let type = 302;
     if (typeof req.query.count === 'string') {
         count = Number(req.query.count);
+    }
+    if (count === 0 && req.query.type) {
+        type = Number(req.query.type);
     }
     if (count > 3) {
         res.send(redirectFile);
     } else {
-        res.redirect(
+        res.redirect(type, 
             'http://localhost:8994/file/redirect?count=' + String(count + 1)
         );
     }
