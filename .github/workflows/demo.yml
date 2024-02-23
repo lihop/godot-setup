@@ -34,10 +34,6 @@ jobs:
             bits: 32
           - mono: true
             version: "v4.2.1-stable"
-          - os: macos-12
-            version: "v4.2.1-stable"
-          - os: windows-latest
-            version: "v4.2.1-stable"
 
           # Issue: https://github.com/godotengine/godot/issues/27496
           - os: ubuntu-latest
