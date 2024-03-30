@@ -26,8 +26,10 @@ jobs:
           ]
         include:
           # Different versions of Godot have different command line options,
-          # export_presets and project settings, so just export for this version.
+          # export_presets and project settings, so just export for these versions.
           - version: "v3.5.1-stable"
+            export-templates: true
+          - version: "v4.2.1-stable"
             export-templates: true
         exclude:
           - os: macos-12
@@ -65,13 +67,14 @@ jobs:
         if: ${{ matrix.export-templates == true }}
         working-directory: test_project
         shell: bash
-        run: godot --no-window --export ${{ matrix.os }}
+        # v3 and v4 use --export and --export-<target> respectively.
+        run: godot --no-window --export ${{ matrix.os }} || godot --headless --export-debug ${{ matrix.os }}
       - name: Run exported project (linux)
         if: ${{ matrix.export-templates == true && matrix.os == 'ubuntu-latest' }}
         working-directory: test_project
         run: |
-          ./test
-          grep 'Test success!' ~/.local/share/godot/app_userdata/test/test.log
+          ./test --rendering-driver opengl3
+          grep 'Test success!' ~/.local/share/godot/app_userdata/test/test.log || grep 'Test success!' ~/.local/share/godot/app_userdata/test/logs/godot.log
       - name: Run exported project (macos)
         if: ${{ matrix.export-templates == true && matrix.os == 'macos-12' }}
         working-directory: test_project
