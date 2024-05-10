@@ -1,8 +1,8 @@
 name: "Build"
 on:
   push:
-  schedule: # Test daily.
-    - cron: 0 11 * * *
+  schedule: # Test weekly.
+    - cron: 9 3 * * wed
 
 jobs:
   run-godot:
