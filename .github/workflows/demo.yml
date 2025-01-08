@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-12]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         bits: [64, 32]
         mono: [true, false]
         version:
@@ -32,11 +32,11 @@ jobs:
           - version: "v4.2.1-stable"
             export-templates: true
         exclude:
-          - os: macos-12
+          - os: macos-latest
             bits: 32
           - mono: true
             version: "v4.2.1-stable"
-          - os: macos-12
+          - os: macos-latest
             version: "v4.2.1-stable"
           - os: windows-latest
             version: "v4.2.1-stable"
@@ -76,7 +76,7 @@ jobs:
           ./test --rendering-driver opengl3
           grep 'Test success!' ~/.local/share/godot/app_userdata/test/test.log || grep 'Test success!' ~/.local/share/godot/app_userdata/test/logs/godot.log
       - name: Run exported project (macos)
-        if: ${{ matrix.export-templates == true && matrix.os == 'macos-12' }}
+        if: ${{ matrix.export-templates == true && matrix.os == 'macos-latest' }}
         working-directory: test_project
         run: |
           volume=`hdiutil attach ./test.dmg | grep Volumes | awk '{print $3}'`
