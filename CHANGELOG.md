@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.3...HEAD)
+## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.4...HEAD)
+
+## [v2.1.4](https://github.com/lihop/setup-godot/compare/v2.1.3...v2.1.4)
+
+### Changed
+
+- All versions are now downloaded from the godotengine repo [releases](https://github.com/godotengine/godot/releases) rather than tuxfamily.org.
+
+### Fixed
+
+- Fixed error occuring on Windows runners due to mesa-dist-win release not being found (again).
 
 ## [v2.1.3](https://github.com/lihop/setup-godot/compare/v2.1.2...v2.1.3) - 2024-03-30
 
