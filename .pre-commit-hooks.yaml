@@ -1,0 +1,7 @@
+- id: check-git-archive
+  name: check git archive structure
+  description: Ensure git archive only contains specified paths for distribution
+  entry: check-git-archive
+  language: python
+  pass_filenames: false
+  always_run: true
