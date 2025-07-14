@@ -165,7 +165,7 @@ jobs:
       - name: Check X11 server not running on :95
         run: DISPLAY=:95; if ! xset -q; then exit 0; else exit 1; fi
       - name: Set DISPLAY environment variable to :95
-        uses: university-of-york/ds-devtool-setEnvVars@v3.1.0
+        uses: university-of-york/ds-devtool-setEnvVars@v3.2.1
         with:
           envFile: test/x11.env
           overwrite: true
