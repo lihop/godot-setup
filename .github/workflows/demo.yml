@@ -20,32 +20,44 @@ jobs:
             "v3.2.3-stable",
             "v3.3.4-stable",
             "v3.4.5-stable",
-            "v3.5.1-stable",
             "v3.5.3-stable",
-            "v4.2.1-stable",
+            "v3.6.1-stable",
+            "v4.2.2-stable",
+            "v4.3-stable",
+            "v4.4.1-stable",
           ]
         include:
           # Different versions of Godot have different command line options,
           # export_presets and project settings, so just export for these versions.
-          - version: "v3.5.1-stable"
+          - version: "v3.6.1-stable"
             export-templates: true
-          - version: "v4.2.1-stable"
+          - version: "v4.4.1-stable"
             export-templates: true
         exclude:
           - os: macos-latest
             bits: 32
-          - mono: true
-            version: "v4.2.1-stable"
           - os: macos-latest
-            version: "v4.2.1-stable"
+            version: "v3.6.1-stable" # FIXME: https://github.com/lihop/godot-setup/issues/28
+          - mono: true
+            version: "v4.2.2-stable"
+          - os: macos-latest
+            version: "v4.2.2-stable"
           - os: windows-latest
-            version: "v4.2.1-stable"
+            version: "v4.2.2-stable"
+          - mono: true
+            version: "v4.3-stable"
+          - os: macos-latest
+            version: "v4.3-stable"
+          - os: windows-latest
+            version: "v4.3-stable"
+          - mono: true
+            version: "v4.4.1-stable"
+          - os: macos-latest
+            version: "v4.4.1-stable"
+          - os: windows-latest
+            version: "v4.4.1-stable"
 
           # Issue: https://github.com/godotengine/godot/issues/27496
-          - os: ubuntu-latest
-            bits: 32
-            mono: false
-            version: "v3.1-stable"
           - os: ubuntu-latest
             bits: 32
             mono: false
@@ -184,7 +196,7 @@ jobs:
         bits: [64, 32]
         mono: [false, true]
         export-type: [regular, threads, gdnative]
-        version: ["v3.5.1-stable"]
+        version: ["v3.6.1-stable"]
         exclude:
           - os: macos-latest
             bits: 32
