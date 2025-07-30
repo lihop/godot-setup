@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.4...HEAD)
 
+### Fixed
+
+- Fixed cache failure due to outdated @actions/cache package.
+
 ## [v2.1.4](https://github.com/lihop/setup-godot/compare/v2.1.3...v2.1.4)
 
 ### Changed
