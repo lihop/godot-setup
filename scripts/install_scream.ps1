@@ -2,7 +2,7 @@
 Taken from comment by Aleksandr Chebotov (al-cheb) at: https://github.com/actions/virtual-environments/issues/2528#issuecomment-766883233 #>
 Start-Service audio*
 Invoke-WebRequest https://github.com/duncanthrax/scream/releases/download/3.6/Scream3.6.zip -OutFile C:\Scream3.6.zip
-Expand-Archive -Path C:\Scream3.6.zip -DestinationPath C:\Scream
+Expand-Archive -Path C:\Scream3.6.zip -DestinationPath C:\Scream -Force
 $cert = (Get-AuthenticodeSignature C:\Scream\Install\driver\Scream.sys).SignerCertificate
 $store = [System.Security.Cryptography.X509Certificates.X509Store]::new("TrustedPublisher", "LocalMachine")
 $store.Open("ReadWrite")
