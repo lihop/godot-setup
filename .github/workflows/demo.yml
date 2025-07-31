@@ -42,19 +42,13 @@ jobs:
             version: "v4.2.2-stable"
           - os: macos-latest
             version: "v4.2.2-stable"
-          - os: windows-latest
-            version: "v4.2.2-stable"
           - mono: true
             version: "v4.3-stable"
           - os: macos-latest
             version: "v4.3-stable"
-          - os: windows-latest
-            version: "v4.3-stable"
           - mono: true
             version: "v4.4.1-stable"
           - os: macos-latest
-            version: "v4.4.1-stable"
-          - os: windows-latest
             version: "v4.4.1-stable"
 
           # Issue: https://github.com/godotengine/godot/issues/27496
@@ -74,7 +68,7 @@ jobs:
           mono: ${{ matrix.mono }}
           export-templates: ${{ matrix.export-templates }}
       - shell: bash
-        run: godot --editor --quit
+        run: godot --rendering-driver opengl3 --editor --quit
       - name: Export project
         if: ${{ matrix.export-templates == true }}
         working-directory: test_project
