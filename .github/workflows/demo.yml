@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [windows-2025]
         bits: [64]
         mono: [false]
         version: ["v3.6.1-stable", "v4.4.1-stable"]
