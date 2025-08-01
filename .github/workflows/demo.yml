@@ -25,5 +25,128 @@ jobs:
           version: ${{ matrix.version }}
           bits: ${{ matrix.bits }}
           mono: ${{ matrix.mono }}
-      - shell: bash
-        run: godot --editor --quit
+      - name: Debug Display Information
+        shell: powershell
+        run: |
+          Write-Host "=== DISPLAY DEBUG INFO ==="
+          Write-Host "All display devices:"
+          Get-WmiObject -Class Win32_VideoController | Select-Object Name, Status, VideoModeDescription, CurrentHorizontalResolution, CurrentVerticalResolution | Format-Table -AutoSize
+          
+          Write-Host "Display configuration:"
+          Get-DisplayResolution | Format-Table -AutoSize
+          
+          Write-Host "Environment variables:"
+          Get-ChildItem Env: | Where-Object { $_.Name -match "(DISPLAY|GL|MESA)" } | Format-Table -AutoSize
+          
+      - name: Test 1 - Standard Godot (with timeout)
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: powershell
+        run: |
+          Write-Host "=== TEST 1: Standard Godot with verbose logging ==="
+          & godot --verbose --editor --quit
+          Write-Host "Exit code: $LASTEXITCODE"
+          
+      - name: Test 2 - Headless Mode (guaranteed to work)
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: powershell
+        run: |
+          Write-Host "=== TEST 2: Headless mode (should work) ==="
+          & godot --headless --verbose --editor --quit
+          Write-Host "Exit code: $LASTEXITCODE"
+          
+      - name: Test 3 - OpenGL3 with logging
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: powershell
+        run: |
+          Write-Host "=== TEST 3: OpenGL3 with full logging ==="
+          & godot --verbose --rendering-driver opengl3 --gpu-validation --log-file test3.log --editor --quit
+          Write-Host "Exit code: $LASTEXITCODE"
+          if (Test-Path "test3.log") {
+            Write-Host "=== LOG CONTENTS ==="
+            Get-Content "test3.log"
+          }
+          
+      - name: Test 4 - Target Virtual Display
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: powershell
+        run: |
+          Write-Host "=== TEST 4: Target virtual display specifically ==="
+          & godot --verbose --windowed --screen 1 --resolution 1920x1080 --log-file test4.log --editor --quit
+          Write-Host "Exit code: $LASTEXITCODE"
+          if (Test-Path "test4.log") {
+            Write-Host "=== LOG CONTENTS ==="
+            Get-Content "test4.log"
+          }
+          
+      - name: Test 5 - Recovery Mode
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: powershell
+        run: |
+          Write-Host "=== TEST 5: Recovery mode (disables problematic features) ==="
+          & godot --verbose --recovery-mode --log-file test5.log --editor --quit
+          Write-Host "Exit code: $LASTEXITCODE"
+          if (Test-Path "test5.log") {
+            Write-Host "=== LOG CONTENTS ==="
+            Get-Content "test5.log"
+          }
+          
+      - name: BASH Test 1 - Standard Godot
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          echo "=== BASH TEST 1: Standard Godot ==="
+          godot --verbose --editor --quit
+          echo "Exit code: $?"
+          
+      - name: BASH Test 2 - Headless Mode
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          echo "=== BASH TEST 2: Headless mode ==="
+          godot --headless --verbose --editor --quit
+          echo "Exit code: $?"
+          
+      - name: BASH Test 3 - OpenGL3 with logging
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          echo "=== BASH TEST 3: OpenGL3 with logging ==="
+          godot --verbose --rendering-driver opengl3 --gpu-validation --log-file bash_test3.log --editor --quit
+          echo "Exit code: $?"
+          if [ -f "bash_test3.log" ]; then
+            echo "=== BASH LOG CONTENTS ==="
+            cat bash_test3.log
+          fi
+          
+      - name: BASH Test 4 - Virtual Display
+        continue-on-error: true
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          echo "=== BASH TEST 4: Target virtual display ==="
+          godot --verbose --windowed --screen 1 --resolution 1920x1080 --log-file bash_test4.log --editor --quit
+          echo "Exit code: $?"
+          if [ -f "bash_test4.log" ]; then
+            echo "=== BASH LOG CONTENTS ==="
+            cat bash_test4.log
+          fi
+          
+      - name: BASH Test 5 - Check Environment
+        continue-on-error: true
+        shell: bash
+        run: |
+          echo "=== BASH ENVIRONMENT CHECK ==="
+          echo "PATH: $PATH"
+          echo "Which godot: $(which godot)"
+          echo "Godot version:"
+          godot --version
+          echo "Display variables:"
+          env | grep -E "(DISPLAY|GL|MESA)" || echo "No display variables found"
