@@ -3,24 +3,36 @@
 ![Godot Version](https://img.shields.io/badge/Godot-3.1+-blue.svg)
 [![Build](https://github.com/lihop/setup-godot/actions/workflows/demo.yml/badge.svg?event=schedule)](https://github.com/lihop/setup-godot/actions/workflows/demo.yml)
 
-GitHub action to setup the Godot game engine so it can run in graphical mode (i.e. non-headless) on Linux, Windows, and macOS.
+GitHub action to setup the Godot game engine so it can run natively with full platform capabilities on Linux, Windows, and macOS.
+This enables testing of visual/graphical features and platform-specific functionality.
 
-This can be useful if you want to test something graphical or platform-specific.
+**Note:** For Godot 4+ visual testing, only Linux runners currently support graphical mode. Windows and macOS runners can run Godot 4+ but may have limitations with visual features.
 
-The downloaded Godot executable will is cached for subsequent runs if the `cache` input is set to `true` (default).
+## Alternatives
 
-## Usage
+If you only need **headless, export, or platform-agnostic functionality** for CI/CD, consider these popular alternatives:
+
+- **[godot-ci](https://github.com/marketplace/actions/godot-ci)**
+- **[Godot Export](https://github.com/marketplace/actions/godot-export)**
+
+## Quick Start
 
 ```yaml
 - name: Setup Godot
   uses: lihop/setup-godot@v2
+  with:
+    version: 3.5.3-stable
 
 # You can now run the downloaded version of godot using the `godot` command in your other steps.
 # For example, run Gut tests:
 - name: Run tests
   shell: bash
-  run: godot --no-window -s addons/gut/gut_cmdln.gd -gexit
+  run: godot -s addons/gut/gut_cmdln.gd -gexit
+```
 
+## Advanced Usage
+
+```yaml
 # You can use the `alias` input if you want to use a different name for the Godot executable
 # or use different names for different versions. For example:
 - name: Install Godot Mono v3.4-beta5
@@ -43,7 +55,7 @@ The downloaded Godot executable will is cached for subsequent runs if the `cache
     version: 3.4.4-stable
     export-templates: true
 
-# Now you can export a run a godot project (this example uses named exports specified in the projects export_presets.cfg file).
+# Now you can export and run a godot project (this example uses named exports specified in the projects export_presets.cfg file).
 - name: Export project
   run: godot --no-window --export "Linux/X11"
 
@@ -54,6 +66,8 @@ The downloaded Godot executable will is cached for subsequent runs if the `cache
 - name: Run exported project
   run: ./exports/linux.64/MyCoolGame.x86_64
 ```
+
+The downloaded Godot executable is cached for subsequent runs if the `cache` input is set to `true` (default).
 
 ## Options
 
