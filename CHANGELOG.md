@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.5...HEAD)
 
-## [v2.1.5](https://github.com/lihop/setup-godot/compare/v2.1.4...v2.1.5)
+## [v2.1.5](https://github.com/lihop/setup-godot/compare/v2.1.4...v2.1.5) - 2025-08-02
 
 ### Fixed
 
 - Fixed cache failure due to outdated @actions/cache package.
 
-## [v2.1.4](https://github.com/lihop/setup-godot/compare/v2.1.3...v2.1.4)
+## [v2.1.4](https://github.com/lihop/setup-godot/compare/v2.1.3...v2.1.4) - 2025-01-08
 
 ### Changed
 
@@ -54,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed error occuring on Windows runners due to mesa-dist-win release not being found.
 
-## [v2.1.0](https://github.com/lihop/setup-godot/compare/v2.0.1...v2.1.0)
+## [v2.1.0](https://github.com/lihop/setup-godot/compare/v2.0.1...v2.1.0) - 2023-01-10
 
 ### Added
 
