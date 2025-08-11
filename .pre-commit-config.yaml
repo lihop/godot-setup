@@ -6,7 +6,7 @@ ci:
   autoupdate_commit_msg: "chore: autoupdate"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -16,7 +16,7 @@ repos:
     hooks:
       - id: prettier
   - repo: https://github.com/psf/black
-    rev: 24.8.0
+    rev: 25.1.0
     hooks:
       - id: black
         language_version: python3
