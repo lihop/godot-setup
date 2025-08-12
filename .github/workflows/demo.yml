@@ -64,7 +64,7 @@ jobs:
             version: "v3.1.2-stable"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Godot
         id: setup-godot
         uses: ./
@@ -106,7 +106,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Godot with alias
         uses: ./
         with:
@@ -137,7 +137,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Godot without using cache
         uses: ./
         with:
@@ -152,7 +152,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Godot
         uses: ./
       - shell: bash
@@ -167,7 +167,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Check X11 server not running on :0
         run: DISPLAY=:0; if ! xset -q; then exit 0; else exit 1; fi
       - name: Setup Godot
@@ -206,7 +206,7 @@ jobs:
             export-type: gdnative
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Godot
         uses: ./
         with:
