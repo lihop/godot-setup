@@ -79,9 +79,3 @@ The downloaded Godot executable is cached for subsequent runs if the `cache` inp
 | alias            | "godot"      | Name of the Godot executable that will be added to PATH                          |
 | cache            | true         | Whether to save/restore Godot (and export templates if downloaded) to/from cache |
 | export-templates | false        | Download export templates                                                        |
-
-## Pre-commit Hook
-
-This repository also provides a pre-commit hook for Godot projects: `check-git-archive`. This hook ensures your repository only includes allowed paths when packaged (useful for Godot Asset Library submissions).
-
-For more information and usage examples, see the [hooks documentation](hooks/README.md).
