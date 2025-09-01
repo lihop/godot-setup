@@ -14,4 +14,6 @@ pulseaudio --check || pulseaudio -D
 xvfb-run --auto-servernum GODOT_EXECUTABLE "$@"
 
 # Cleanup (allowed to fail).
-pulseaudio -k || true
+if pulseaudio --check > /dev/null 2>&1; then
+  pulseaudio -k || true
+fi
