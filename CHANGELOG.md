@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.5...HEAD)
+## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.6...HEAD)
+
+## [v2.1.6](https://github.com/lihop/setup-godot/compare/v2.1.5...v2.1.6) - 2025-09-01
+
+### Fixed
+
+- On Linux, check if the pulseaudio daemon is running before attempting to kill it. This prevents script failures in environments with 'set -e' and 'set -o pipefail' when the daemon is already stopped.
 
 ## [v2.1.5](https://github.com/lihop/setup-godot/compare/v2.1.4...v2.1.5) - 2025-08-02
 
