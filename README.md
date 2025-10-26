@@ -1,6 +1,6 @@
 # Godot Setup
 
-![Godot Version](https://img.shields.io/badge/Godot-3.1+-blue.svg)
+![Godot Version](https://img.shields.io/badge/Godot-4.3+-blue.svg)
 [![Build](https://github.com/lihop/setup-godot/actions/workflows/demo.yml/badge.svg?event=schedule)](https://github.com/lihop/setup-godot/actions/workflows/demo.yml)
 
 GitHub action to setup the Godot game engine so it can run natively with full platform capabilities on Linux, Windows, and macOS.
@@ -73,8 +73,8 @@ The downloaded Godot executable is cached for subsequent runs if the `cache` inp
 
 | Name             | Default      | Description                                                                      |
 | ---------------- | ------------ | -------------------------------------------------------------------------------- |
-| version          | "3.5-stable" | Godot version to use                                                             |
-| bits             | 64           | 64 or 32 bit build                                                               |
+| version          | "4.4-stable" | Godot version to use                                                             |
+| arch             | <detected>   | Target architecture (x86_64, arm64, x86_32, arm32)                               |
 | mono             | false        | Use the Mono build                                                               |
 | alias            | "godot"      | Name of the Godot executable that will be added to PATH                          |
 | cache            | true         | Whether to save/restore Godot (and export templates if downloaded) to/from cache |

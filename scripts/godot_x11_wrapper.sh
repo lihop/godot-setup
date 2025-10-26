@@ -8,12 +8,14 @@ set -e
 if [ "$LANG" == "C.UTF-8" ]; then LANG=en; fi
 
 # Start dummy sound device.
-pulseaudio --check || pulseaudio -D
+if command -v pulseaudio > /dev/null 2>&1; then
+  pulseaudio --check || pulseaudio -D
+fi
 
 # Running godot with X11 Display.
 xvfb-run --auto-servernum GODOT_EXECUTABLE "$@"
 
 # Cleanup (allowed to fail).
-if pulseaudio --check > /dev/null 2>&1; then
+if command -v pulseaudio > /dev/null 2>&1 && pulseaudio --check > /dev/null 2>&1; then
   pulseaudio -k || true
 fi

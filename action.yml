@@ -7,11 +7,10 @@ inputs:
   version:
     description: "Godot version to use"
     required: true
-    default: "3.5.1-stable"
-  bits:
-    description: "64 or 32 bit build"
+    default: "4.3-stable"
+  arch:
+    description: "Target architecture (x86_64, arm64, x86_32, arm32). Auto-detected if not specified."
     required: false
-    default: 64
   mono:
     description: "Use the Mono build"
     required: false

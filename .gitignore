@@ -6,3 +6,23 @@
 test_project/export
 test_project/test
 node_modules/.cache
+
+# Godot 4+ specific ignores
+test_project/.godot/
+test_project/.nomedia
+
+# Godot-specific ignores
+test_project/export_credentials.cfg
+test_project/*.tmp
+
+# Imported translations (automatically generated from CSV files)
+test_project/*.translation
+
+# Mono-specific ignores
+test_project/.mono/
+test_project/data_*/
+test_project/mono_crash.*.json
+
+# C# build artifacts (keep .csproj and .sln files)
+test_project/[Bb]in/
+test_project/[Oo]bj/

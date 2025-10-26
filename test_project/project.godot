@@ -6,13 +6,18 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
 config/name="test"
 run/main_scene="res://test.tscn"
+config/features=PackedStringArray("4.5", "C#")
 config/icon="res://icon.png"
+
+[dotnet]
+
+project/assembly_name="test"
 
 [logging]
 
@@ -25,4 +30,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 environment/default_environment="res://default_env.tres"

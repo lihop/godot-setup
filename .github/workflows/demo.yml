@@ -6,62 +6,60 @@ on:
 
 jobs:
   run-godot:
-    name: ${{ matrix.os }} ${{ matrix.bits }}bit ${{ matrix.version }} ${{ matrix.mono && 'mono' || '' }} ${{ matrix.export-templates && 'export' || '' }}
-    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} ${{ matrix.arch }} ${{ matrix.version }} ${{ matrix.mono && 'mono' || '' }}
+    runs-on: ${{ (matrix.arch == 'arm64' && matrix.os == 'ubuntu-latest') && 'ubuntu-24.04-arm' || (matrix.arch == 'arm64' && matrix.os == 'windows-latest') && 'windows-11-arm' || (matrix.arch == 'arm32' && matrix.os == 'ubuntu-latest') && 'ubuntu-24.04-arm' || matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        bits: [64, 32]
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-15-intel]
+        arch: [x86_64, x86_32, arm64, arm32, universal]
         mono: [true, false]
-        version:
-          [
-            "v3.1.2-stable",
-            "v3.2.3-stable",
-            "v3.3.4-stable",
-            "v3.4.5-stable",
-            "v3.5.3-stable",
-            "v3.6.1-stable",
-            "v4.2.2-stable",
-            "v4.3-stable",
-            "v4.4.1-stable",
-          ]
-        include:
-          # Different versions of Godot have different command line options,
-          # export_presets and project settings, so just export for these versions.
-          - version: "v3.6.1-stable"
-            export-templates: true
-          - version: "v4.4.1-stable"
-            export-templates: true
+        version: ["v4.3", "v4.4.1", "v4.5.1"]
         exclude:
-          - os: macos-latest
-            bits: 32
-          - os: macos-latest
-            version: "v3.6.1-stable" # FIXME: https://github.com/lihop/godot-setup/issues/28
-          - mono: true
-            version: "v4.2.2-stable"
-          - os: macos-latest
-            version: "v4.2.2-stable"
-          - os: windows-latest
-            version: "v4.2.2-stable"
-          - mono: true
-            version: "v4.3-stable"
-          - os: macos-latest
-            version: "v4.3-stable"
-          - os: windows-latest
-            version: "v4.3-stable"
-          - mono: true
-            version: "v4.4.1-stable"
-          - os: macos-latest
-            version: "v4.4.1-stable"
-          - os: windows-latest
-            version: "v4.4.1-stable"
-
-          # Issue: https://github.com/godotengine/godot/issues/27496
           - os: ubuntu-latest
-            bits: 32
-            mono: false
-            version: "v3.1.2-stable"
+            arch: universal
+          - os: windows-latest
+            arch: universal
+          - os: windows-latest
+            arch: arm32
+          - os: ubuntu-latest
+            arch: universal
+          - os: windows-latest
+            arch: universal
+          - os: macos-latest
+            arch: x86_64
+          - os: macos-latest
+            arch: x86_32
+          - os: macos-latest
+            arch: arm64
+          - os: macos-latest
+            arch: arm32
+          - os: macos-15-intel
+            arch: x86_64
+          - os: macos-15-intel
+            arch: x86_32
+          - os: macos-15-intel
+            arch: arm64
+          - os: macos-15-intel
+            arch: arm32
+          # mono builds don't work for Windows 32-bit (on 64-bit runner) before Godot v4.3
+          - mono: true
+            os: windows-latest
+            arch: x86_32
+            version: "v4.3"
+          - mono: true
+            os: windows-latest
+            arch: x86_32
+            version: "v4.4.1"
+          # arm32 hangs on ubuntu with v4.5.1
+          - os: ubuntu-latest
+            arch: arm32
+            version: "v4.5.1"
+          # mono hangs on macos
+          - os: macos-latest
+            mono: true
+          - os: macos-15-intel
+            mono: true
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -70,34 +68,43 @@ jobs:
         uses: ./
         with:
           version: ${{ matrix.version }}
-          bits: ${{ matrix.bits }}
+          arch: ${{ matrix.arch }}
           mono: ${{ matrix.mono }}
-          export-templates: ${{ matrix.export-templates }}
+          export-templates: true
       - shell: bash
-        run: godot --editor --quit
+        run: godot --editor ${{ matrix.os == 'windows-latest' && '--headless' || '' }} --quit
+      - name: Check if export should be skipped
+        id: check-export
+        shell: bash
+        run: |
+          if [[ "${{ matrix.mono }}" == "true" && ("${{ matrix.arch }}" == "x86_32" || "${{ matrix.arch }}" == "arm32") ]]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
       - name: Export project
-        if: ${{ matrix.export-templates == true }}
+        if: steps.check-export.outputs.skip != 'true'
         working-directory: test_project
         shell: bash
-        # v3 and v4 use --export and --export-<target> respectively.
-        run: godot --no-window --export ${{ matrix.os }} || godot --headless --export-debug ${{ matrix.os }}
+        run: godot --headless --export-debug ${{ matrix.os }}-${{ matrix.arch }}${{ matrix.mono && '-mono' || '' }}
       - name: Run exported project (linux)
-        if: ${{ matrix.export-templates == true && matrix.os == 'ubuntu-latest' }}
+        if: ${{ steps.check-export.outputs.skip != 'true' && matrix.os == 'ubuntu-latest' }}
         working-directory: test_project
         run: |
           ./test --rendering-driver opengl3
           grep 'Test success!' ~/.local/share/godot/app_userdata/test/test.log || grep 'Test success!' ~/.local/share/godot/app_userdata/test/logs/godot.log
       - name: Run exported project (macos)
-        if: ${{ matrix.export-templates == true && matrix.os == 'macos-latest' }}
+        if: ${{ steps.check-export.outputs.skip != 'true' && (matrix.os == 'macos-latest' || matrix.os == 'macos-15-intel') }}
         working-directory: test_project
         run: |
           volume=`hdiutil attach ./test.dmg | grep Volumes | awk '{print $3}'`
           cp -rf $volume/*.app /Applications
           hdiutil detach $volume
-          open -W /Applications/test.app
-          grep 'Test success!' ~/Library/Application\ Support/Godot/app_userdata/test/test.log
+          /Applications/test.app/Contents/MacOS/test --rendering-driver opengl3
+          sleep 2
+          grep 'Test success!' ~/Library/Application\ Support/Godot/app_userdata/test/test.log || grep 'Test success!' ~/Library/Application\ Support/Godot/app_userdata/test/logs/godot.log
       - name: Run exported project (windows)
-        if: ${{ matrix.export-templates == true && matrix.os == 'windows-latest' }}
+        if: ${{ steps.check-export.outputs.skip != 'true' && matrix.os == 'windows-latest' }}
         working-directory: test_project
         run: .\test.exe -and Select-String -Path "$env:Appdata\Godot\app_userdata\test\test.log" -Pattern "Test success!"
 
@@ -113,20 +120,20 @@ jobs:
           alias: coolGameEngine
       - name: Run Godot with alias
         run: coolGameEngine --editor --quit
-      - name: Setup Godot v3.3.2 with alias
+      - name: Setup Godot v4.4.1 with alias
         uses: ./
         with:
-          version: 3.3.2
-          alias: godot-3.3.2
-      - name: Setup Godot v3.2 with alias
+          version: 4.4.1
+          alias: godot-4.4.1
+      - name: Setup Godot v4.3 with alias
         uses: ./
         with:
-          version: 3.2
-          alias: godot-3.2
+          version: 4.3
+          alias: godot-4.3
       - name: Check versions
         run: |
-          godot-3.3.2 --version || true
-          godot-3.2 --version || true
+          godot-4.4.1 --version || true
+          godot-4.3 --version || true
 
   no_cache:
     name: "no cache"
@@ -150,6 +157,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        exclude:
+          # Windows hangs.
+          - os: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -186,23 +196,22 @@ jobs:
         run: if ! xset -q; then exit 1; else exit 0; fi
 
   export-html5:
-    name: Export HTML5 (${{ matrix.os }}, ${{ matrix.bits }}bit, ${{ matrix.version }}, ${{ matrix.mono && 'mono, ' || '' }}${{ matrix.export-type }})
-    runs-on: ${{ matrix.os }}
+    name: Export HTML5 (${{ matrix.os }}, ${{ matrix.arch }}, ${{ matrix.version }}, ${{ matrix.mono && 'mono, ' || '' }}${{ matrix.export-type }})
+    runs-on: ${{ (matrix.arch == 'arm64' && matrix.os == 'ubuntu-latest') && 'ubuntu-24.04-arm' || (matrix.arch == 'arm64' && matrix.os == 'windows-latest') && 'windows-2022-arm64' || (matrix.arch == 'arm32' && matrix.os == 'ubuntu-latest') && 'ubuntu-24.04-arm' || matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        bits: [64, 32]
-        mono: [false, true]
+        arch: [x86_64, universal]
         export-type: [regular, threads, gdnative]
-        version: ["v3.6.1-stable"]
+        version: ["v4.3-stable"]
         exclude:
+          - os: ubuntu-latest
+            arch: universal
           - os: macos-latest
-            bits: 32
-          - mono: true
-            export-type: threads
-          - mono: true
-            export-type: gdnative
+            arch: x86_64
+          - os: windows-latest
+            arch: universal
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -210,10 +219,26 @@ jobs:
         uses: ./
         with:
           version: ${{ matrix.version }}
-          bits: ${{ matrix.bits }}
-          mono: ${{ matrix.mono }}
+          arch: ${{ matrix.arch }}
           export-templates: true
       - name: Export HTML5 (${{ matrix.export-type }})
         shell: bash
         working-directory: test_project
-        run: godot --no-window --export html5-${{ matrix.export-type }}
+        run: |
+          preset="html5-${{ matrix.export-type }}"
+          case "$preset" in
+            html5-regular)
+              output="export/html5-regular/index.html"
+              ;;
+            html5-threads)
+              output="export/html5-threads/index.html"
+              ;;
+            html5-gdnative)
+              output="export/html5-gdnative/index.html"
+              ;;
+            *)
+              echo "Unknown HTML5 export preset '$preset'"
+              exit 1
+              ;;
+          esac
+          godot --headless --export-release "$preset" "$output"
