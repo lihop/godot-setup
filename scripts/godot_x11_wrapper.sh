@@ -13,6 +13,9 @@ if command -v pulseaudio > /dev/null 2>&1; then
 fi
 
 # Running godot with X11 Display.
+if [ -n "${GODOT_FORCE_RENDERING_DRIVER:-}" ]; then
+  set -- --rendering-driver "$GODOT_FORCE_RENDERING_DRIVER" "$@"
+fi
 xvfb-run --auto-servernum GODOT_EXECUTABLE "$@"
 
 # Cleanup (allowed to fail).
