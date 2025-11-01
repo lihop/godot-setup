@@ -16,7 +16,7 @@ fi
 if [ -n "${GODOT_FORCE_RENDERING_DRIVER:-}" ]; then
   set -- --rendering-driver "$GODOT_FORCE_RENDERING_DRIVER" "$@"
 fi
-xvfb-run --auto-servernum GODOT_EXECUTABLE "$@"
+xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24 +extension GLX" GODOT_EXECUTABLE "$@"
 
 # Cleanup (allowed to fail).
 if command -v pulseaudio > /dev/null 2>&1 && pulseaudio --check > /dev/null 2>&1; then
