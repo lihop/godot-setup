@@ -5,7 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/lihop/setup-godot/compare/v2.1.6...HEAD)
+## [Unreleased](https://github.com/lihop/setup-godot/compare/v3.0.0...HEAD)
+
+## [v3.0.0](https://github.com/lihop/setup-godot/compare/v2.1.6...v3.0.0) - 2025-11-16
+
+### Added
+
+- Support for ARM architectures (arm64, arm32).
+
+### Changed
+
+- **BREAKING**: Replaced `bits` input parameter with `arch` parameter (x86_64, arm64, x86_32, arm32).
+- **BREAKING**: Minimum supported Godot version is now 4.0 (dropped Godot 3.x support).
+- Default Godot version changed from "3.5.1-stable" to "4.3-stable".
+
+### Removed
+
+- **BREAKING**: Support for Godot 3.x versions.
 
 ## [v2.1.6](https://github.com/lihop/setup-godot/compare/v2.1.5...v2.1.6) - 2025-09-01
 
