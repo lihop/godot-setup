@@ -62,7 +62,7 @@ jobs:
             mono: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Setup Godot
         id: setup-godot
         uses: ./
@@ -113,7 +113,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Setup Godot with alias
         uses: ./
         with:
@@ -144,7 +144,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Setup Godot without using cache
         uses: ./
         with:
@@ -162,7 +162,7 @@ jobs:
           - os: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Setup Godot
         uses: ./
       - shell: bash
@@ -177,7 +177,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Set DISPLAY environment variable to :0
         run: echo "DISPLAY=:0" >> $GITHUB_ENV
       - name: Check X11 server not running on :0
@@ -214,7 +214,7 @@ jobs:
             arch: universal
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Setup Godot
         uses: ./
         with:
